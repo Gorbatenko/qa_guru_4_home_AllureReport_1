@@ -10,8 +10,8 @@ import static org.openqa.selenium.By.linkText;
 
 public class BaseSteps {
     @Step("Открываем главную страницу")
-    public void openMainPage() {
-        open("https://github.com/");
+    public void openMainPage(String page) {
+        open(page);
     }
 
     @Step("Поиск репозитория {repository}")
