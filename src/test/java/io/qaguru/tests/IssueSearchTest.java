@@ -9,22 +9,22 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.openqa.selenium.By.linkText;
 
 public class IssueSearchTest {
-    private final String repository = "eroshenkoam/allure-example";
-    private final int issue_number = 68;
+    private static final String REPOSITORY = "eroshenkoam/allure-example";
+    private static final int ISSUE_NUMBER = 68;
 
     @Test
     void issueSearchTestDefault() {
         open("https://github.com/");
 
         $(".header-search-input").click();
-        $(".header-search-input").setValue(repository);
+        $(".header-search-input").setValue(REPOSITORY);
         $(".header-search-input").pressEnter();
 
-        $(linkText(repository)).click();
+        $(linkText(REPOSITORY)).click();
 
         $(byText("Issues")).click();
 
-        $("#issue_" + issue_number).should(exist);
+        $("#issue_" + ISSUE_NUMBER).should(exist);
     }
 
 }
