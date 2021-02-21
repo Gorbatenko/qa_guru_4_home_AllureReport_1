@@ -1,5 +1,6 @@
 package io.qaguru.tests;
 
+import io.qaguru.steps.BaseSteps;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -12,6 +13,7 @@ import static org.openqa.selenium.By.linkText;
 public class IssueSearchTest {
     private static final String REPOSITORY = "eroshenkoam/allure-example";
     private static final int ISSUE_NUMBER = 68;
+    public BaseSteps steps = new BaseSteps();
 
     @Test
     void issueSearchTestDefault() {
@@ -53,4 +55,12 @@ public class IssueSearchTest {
         });
     }
 
+    @Test
+    void issueSearchTestSteps() {
+        steps.openMainPage();
+        steps.searchRepository(REPOSITORY);
+        steps.goToRepository(REPOSITORY);
+        steps.openRepositoryIssues();
+        steps.shouldSeeIssueWithNumber(ISSUE_NUMBER);
+    }
 }
