@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -36,15 +36,13 @@ public class IssueSearchTest {
     void issueSearchTestDefault() {
         open(BASE_URL);
 
-        $(".header-search-input").click();
-        $(".header-search-input").setValue(REPOSITORY);
-        $(".header-search-input").pressEnter();
+        $(".header-search-input").setValue(REPOSITORY).submit();
 
         $(linkText(REPOSITORY)).click();
 
         $(byText("Issues")).click();
 
-        $("#issue_" + ISSUE_NUMBER).should(exist);
+        $("#issue_" + ISSUE_NUMBER).shouldBe(visible);
     }
 
     @Test
@@ -60,9 +58,7 @@ public class IssueSearchTest {
         });
 
         step("Поиск репозитория " + REPOSITORY, () -> {
-            $(".header-search-input").click();
-            $(".header-search-input").setValue(REPOSITORY);
-            $(".header-search-input").pressEnter();
+            $(".header-search-input").setValue(REPOSITORY).submit();
         });
 
         step("Переход в репозиторий " + REPOSITORY, () -> {
@@ -74,7 +70,7 @@ public class IssueSearchTest {
         });
 
         step("Проверка существования issue #" + ISSUE_NUMBER, () -> {
-            $("#issue_" + ISSUE_NUMBER).should(exist);
+            $("#issue_" + ISSUE_NUMBER).shouldBe(visible);
         });
     }
 
